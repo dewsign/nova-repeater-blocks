@@ -3,6 +3,7 @@
 namespace Dewsign\NovaRepeaterBlocks\Providers;
 
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class PackageServiceProvider extends ServiceProvider
@@ -18,7 +19,6 @@ class PackageServiceProvider extends ServiceProvider
         $this->bootAssets();
         $this->bootCommands();
         $this->publishDatabaseFiles();
-        $this->registerMiddleware();
     }
 
     /**
@@ -28,7 +28,7 @@ class PackageServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->registerBladeExtensions();
     }
 
     /**
@@ -52,9 +52,9 @@ class PackageServiceProvider extends ServiceProvider
      */
     private function bootViews()
     {
-        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'dewsign');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'nova-repeater-blocks');
         $this->publishes([
-            __DIR__.'/../Resources/views' => resource_path('views/vendor/dewsign'),
+            __DIR__.'/../Resources/views' => resource_path('views/vendor/nova-repeater-blocks'),
         ]);
     }
 
@@ -66,19 +66,8 @@ class PackageServiceProvider extends ServiceProvider
     private function bootAssets()
     {
         $this->publishes([
-            __DIR__.'/../Resources/assets/js' => resource_path('assets/js/vendor/dewsign'),
+            __DIR__.'/../Resources/assets/js' => resource_path('assets/js/vendor/nova-repeater-blocks'),
         ], 'js');
-    }
-
-    /**
-     * Make middleware available to routes
-     *
-     * @param Router $router
-     * @return void
-     */
-    private function registerMiddleware(Router $router)
-    {
-        // $router->aliasMiddleware('name', MyMiddleware::class);
     }
 
     private function publishDatabaseFiles()
@@ -100,5 +89,12 @@ class PackageServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../Database/seeds' => base_path('database/seeds')
         ], 'seeds');
+    }
+
+    public function registerBladeExtensions()
+    {
+        Blade::directive('renderblocks', function ($expression = []) {
+            return "<?php echo \Dewsign\NovaRepeaterBlocks\Support\RenderEngine::renderRepeaters({$expression}); ?>";
+        });
     }
 }
