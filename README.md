@@ -16,7 +16,9 @@ Run the migrations. Note: This package uses a single table to manage all polymor
 php artisan migrate
 ```
 
-## Usage (Nova UI)
+## Usage
+
+### Nova UI
 
 For this readme we will use a basic Blog example where a Blog Post is generated from multiple Rich Text Editor style repeatable content blocks (e.g. Text, Image.)
 
@@ -116,4 +118,42 @@ class Post extends Resource
         ];
     }
 }
+```
+
+### Front-end blade output
+
+This package includes a blade helper to render repeater blocks on a model. Simply pass your entire model into the helper to render all the repeaters in their sorting order.
+
+```php
+@repeaterBlocks($model)
+```
+
+The following naming sequence will be used to find the correct template to render. The first view found will be used. The namespace is a slugified version of the full class namespace of the model
+
+```php
+    [
+        $repeaterBlockViewTemplate,
+        'repeaters.app.rbtext', // App\RbText
+        'nova-repeater-blocks::repeaters.app.rbtext',
+        'repeaters.default',
+        'nova-repeater-blocks::repeaters.default',
+    ]
+```
+
+The repeater block view will receive the following parameters:
+
+|Key|Content Type|Pupose|
+|---|----|---|
+|repeaterKey|String|The key used to find the template|
+|repeaterContent|Object|The full related model|
+|{attributes}|Mixed|All the attributes from the model as variables|
+
+Typically the easiest way to access the data in your repeater view is to access the attributes directly as variables. For the above example given this could be.
+
+```php
+// rbtext.blade.php
+
+<{{ $format }}>
+    {{ $text }}
+</{{ $format }}>
 ```
