@@ -157,3 +157,20 @@ Typically the easiest way to access the data in your repeater view is to access 
     {{ $text }}
 </{{ $format }}>
 ```
+
+## Customisation
+
+If you want to display additional fields in the repeaters index view you can merge computed properties into the fields method. Be sure to include the parent fields though. It is best to include the custom fields at the beginning of the fields array.
+
+```php
+// app/Nova/PostRepeater.php
+
+public function fields(Request $request)
+{
+    return array_merge([
+        Text::make('Format', function () {
+            return $this->type->format;
+        })->onlyOnIndex(),
+    ], parent::fields($request))
+}
+```
