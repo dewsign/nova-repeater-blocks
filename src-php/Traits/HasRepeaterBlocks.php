@@ -8,7 +8,14 @@ trait HasRepeaterBlocks
 {
     public function repeaters()
     {
-        return $this->morphMany(Repeater::class, 'repeatable')->ordered();
+        return $this->morphMany(Repeater::class, 'repeatable')
+            ->ordered()
+            ->with('type');
+    }
+
+    public function scopeIncludeRepeaters($query)
+    {
+        return $query->with('repeaters');
     }
 
     public static function bootHasRepeaterBlocks()
