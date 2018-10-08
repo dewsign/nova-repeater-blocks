@@ -93,7 +93,7 @@ class PackageServiceProvider extends ServiceProvider
 
     public function registerBladeExtensions()
     {
-        Blade::directive('renderblocks', function ($expression = []) {
+        Blade::directive('repeaterblocks', function ($expression = []) {
             return "<?php echo \Dewsign\NovaRepeaterBlocks\Support\RenderEngine::renderRepeaters({$expression}); ?>";
         });
     }
