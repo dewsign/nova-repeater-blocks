@@ -134,9 +134,9 @@ The following naming sequence will be used to find the correct template to rende
     [
         $repeaterBlockViewTemplate,
         'repeaters.app.rbtext', // App\RbText
-        'nova-repeater-blocks::repeaters.app.rbtext',
+        'nova-repeater-blocks::app.rbtext',
         'repeaters.default',
-        'nova-repeater-blocks::repeaters.default',
+        'nova-repeater-blocks::default',
     ]
 ```
 
@@ -145,6 +145,7 @@ The repeater block view will receive the following parameters:
 |Key|Content Type|Pupose|
 |---|----|---|
 |repeaterKey|String|The key used to find the template|
+|repeaterShortKey|String|The short name of the model without namespace|
 |repeaterContent|Object|The full related model|
 |{attributes}|Mixed|All the attributes from the model as variables|
 

@@ -5,6 +5,9 @@ namespace Dewsign\NovaRepeaterBlocks\Providers;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextBlock;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextareaBlock;
 
 class PackageServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,7 @@ class PackageServiceProvider extends ServiceProvider
         $this->bootAssets();
         $this->bootCommands();
         $this->publishDatabaseFiles();
+        $this->registerMorphmaps();
     }
 
     /**
@@ -96,5 +100,13 @@ class PackageServiceProvider extends ServiceProvider
         Blade::directive('repeaterblocks', function ($expression = []) {
             return "<?php echo \Dewsign\NovaRepeaterBlocks\Support\RenderEngine::renderRepeaters({$expression}); ?>";
         });
+    }
+
+    private function registerMorphmaps()
+    {
+        Relation::morphMap([
+            'repeater.text_block' => TextBlock::class,
+            'repeater.textarea_block' => TextareaBlock::class,
+        ]);
     }
 }

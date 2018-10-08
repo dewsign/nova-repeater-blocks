@@ -15,6 +15,7 @@ class RenderEngine
         return $model->repeaters->map(function ($repeater) {
             $repeaterType = new \ReflectionClass($repeater->type);
             $repeaterKey = str_replace('\\', '.', $repeaterType->name);
+            $repeaterShortKey = $repeaterType->getShortName();
             $repeaterContent = $repeater->type;
 
             return view()->first([
@@ -27,6 +28,7 @@ class RenderEngine
                 'nova-repeater-blocks::default'
                 ])->with([
                     'repeaterKey' => $repeaterKey,
+                    'repeaterShortKey' => $repeaterShortKey,
                     'repeaterContent' => $repeaterContent,
                 ])->with($repeaterContent->toArray())
                 ->render();
