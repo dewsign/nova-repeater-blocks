@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextBlock;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\ImageBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextareaBlock;
 
 class PackageServiceProvider extends ServiceProvider
@@ -107,6 +108,7 @@ class PackageServiceProvider extends ServiceProvider
         Relation::morphMap([
             'repeater.text_block' => TextBlock::class,
             'repeater.textarea_block' => TextareaBlock::class,
+            'repeater.image_block' => ImageBlock::class,
         ]);
     }
 }
