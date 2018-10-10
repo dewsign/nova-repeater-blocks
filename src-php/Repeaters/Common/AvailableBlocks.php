@@ -3,7 +3,9 @@
 namespace Dewsign\NovaRepeaterBlocks\Repeaters\Common;
 
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextBlock;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\ImageBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextareaBlock;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\CustomViewBlock;
 
 class AvailableBlocks
 {
@@ -12,6 +14,8 @@ class AvailableBlocks
         return [
             TextBlock::class,
             TextareaBlock::class,
+            ImageBlock::class,
+            CustomViewBlock::class,
         ];
     }
 

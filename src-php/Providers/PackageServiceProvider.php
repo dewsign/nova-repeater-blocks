@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\ImageBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextareaBlock;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\CustomViewBlock;
 
 class PackageServiceProvider extends ServiceProvider
 {
@@ -109,6 +110,7 @@ class PackageServiceProvider extends ServiceProvider
             'repeater.text_block' => TextBlock::class,
             'repeater.textarea_block' => TextareaBlock::class,
             'repeater.image_block' => ImageBlock::class,
+            'repeater.custom_view_block' => CustomViewBlock::class,
         ]);
     }
 }
