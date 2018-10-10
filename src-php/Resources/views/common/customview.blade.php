@@ -1,1 +1,3 @@
-<p>Custom View</p>
+@if(view()->exists($name))
+    @include($name)
+@endif
