@@ -20,6 +20,7 @@ class PackageServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
+        $this->publishConfigs();
         $this->bootViews();
         $this->bootAssets();
         $this->bootCommands();
@@ -35,6 +36,33 @@ class PackageServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerBladeExtensions();
+
+        $this->mergeConfigFrom(
+            $this->getConfigsPath(),
+            'repeater-blocks'
+        );
+    }
+
+    /**
+     * Publish configuration file.
+     *
+     * @return void
+     */
+    private function publishConfigs()
+    {
+        $this->publishes([
+            $this->getConfigsPath() => config_path('repeater-blocks.php'),
+        ], 'config');
+    }
+
+    /**
+     * Get local package configuration path.
+     *
+     * @return string
+     */
+    private function getConfigsPath()
+    {
+        return __DIR__.'/../Config/repeater-blocks.php';
     }
 
     /**
