@@ -5,6 +5,6 @@ use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\CustomViewBlock;
 
 $factory->define(CustomViewBlock::class, function (Faker $faker) {
     return [
-        'template-name' => $faker->word,
+        'template_name' => $faker->word,
     ];
 });
