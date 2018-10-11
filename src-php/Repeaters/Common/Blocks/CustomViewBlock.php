@@ -30,7 +30,7 @@ class CustomViewBlock extends Resource
      */
     public static $search = [
         'id',
-        'name',
+        'template_name',
     ];
 
     public static function label()
@@ -41,7 +41,7 @@ class CustomViewBlock extends Resource
     public function fields(Request $request)
     {
         return [
-            Text::make('Name')->rules('required', 'max:254'),
+            Text::make('Template Name')->rules('required', 'max:254'),
         ];
     }
 }
