@@ -15,7 +15,7 @@ class CreateCustomViewBlocksTable extends Migration
     {
         Schema::create('custom_view_blocks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('template_name');
             $table->timestamps();
         });
     }
