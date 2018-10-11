@@ -15,7 +15,6 @@ class CreateMarkdownBlocksTable extends Migration
     {
         Schema::create('markdown_blocks', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->text('content');
             $table->timestamps();
         });

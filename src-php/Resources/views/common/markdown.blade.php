@@ -1,1 +1,1 @@
-<p>Markdown block</p>
+{{ $content }}
