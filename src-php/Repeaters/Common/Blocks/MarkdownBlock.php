@@ -4,6 +4,7 @@ namespace Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks;
 
 use Laravel\Nova\Resource;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Textarea;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Dewsign\NovaRepeaterBlocks\Traits\IsRepeaterBlockResource;
@@ -40,7 +41,7 @@ class MarkdownBlock extends Resource
     public function fields(Request $request)
     {
         return [
-            Textarea::make('Content')->rules('required'),
+            Markdown::make('Content')->rules('required'),
         ];
     }
 }

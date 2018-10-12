@@ -10,6 +10,7 @@ use Dewsign\NovaRepeaterBlocks\Fields\Repeater;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\ImageBlock;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\MarkdownBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextareaBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\CustomViewBlock;
 
@@ -43,7 +44,7 @@ class PackageServiceProvider extends ServiceProvider
             $this->getConfigsPath(),
             'repeater-blocks'
         );
-      
+
         Nova::resources([
             Repeater::class,
         ]);
@@ -145,6 +146,7 @@ class PackageServiceProvider extends ServiceProvider
             'repeater.textarea_block' => TextareaBlock::class,
             'repeater.image_block' => ImageBlock::class,
             'repeater.custom_view_block' => CustomViewBlock::class,
+            'repeater.markdown_block' => MarkdownBlock::class,
         ]);
     }
 }
