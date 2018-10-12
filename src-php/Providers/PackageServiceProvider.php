@@ -9,7 +9,9 @@ use Illuminate\Support\ServiceProvider;
 use Dewsign\NovaRepeaterBlocks\Fields\Repeater;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextBlock;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\ImageBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextareaBlock;
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\CustomViewBlock;
 
 class PackageServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,7 @@ class PackageServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
+        $this->publishConfigs();
         $this->bootViews();
         $this->bootAssets();
         $this->bootCommands();
@@ -36,9 +39,36 @@ class PackageServiceProvider extends ServiceProvider
     {
         $this->registerBladeExtensions();
 
+        $this->mergeConfigFrom(
+            $this->getConfigsPath(),
+            'repeater-blocks'
+        );
+      
         Nova::resources([
             Repeater::class,
         ]);
+    }
+
+    /**
+     * Publish configuration file.
+     *
+     * @return void
+     */
+    private function publishConfigs()
+    {
+        $this->publishes([
+            $this->getConfigsPath() => config_path('repeater-blocks.php'),
+        ], 'config');
+    }
+
+    /**
+     * Get local package configuration path.
+     *
+     * @return string
+     */
+    private function getConfigsPath()
+    {
+        return __DIR__.'/../Config/repeater-blocks.php';
     }
 
     /**
@@ -113,6 +143,8 @@ class PackageServiceProvider extends ServiceProvider
         Relation::morphMap([
             'repeater.text_block' => TextBlock::class,
             'repeater.textarea_block' => TextareaBlock::class,
+            'repeater.image_block' => ImageBlock::class,
+            'repeater.custom_view_block' => CustomViewBlock::class,
         ]);
     }
 }
