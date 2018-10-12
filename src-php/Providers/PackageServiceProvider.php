@@ -2,9 +2,11 @@
 
 namespace Dewsign\NovaRepeaterBlocks\Providers;
 
+use Laravel\Nova\Nova;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Dewsign\NovaRepeaterBlocks\Fields\Repeater;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextBlock;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextareaBlock;
@@ -33,6 +35,10 @@ class PackageServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerBladeExtensions();
+
+        Nova::resources([
+            Repeater::class,
+        ]);
     }
 
     /**
