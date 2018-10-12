@@ -5,10 +5,12 @@ namespace Dewsign\NovaRepeaterBlocks\Models;
 use Spatie\EloquentSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EloquentSortable\SortableTrait;
+use Dewsign\NovaRepeaterBlocks\Traits\HasRepeaterBlocks;
 
 class Repeater extends Model implements Sortable
 {
     use SortableTrait;
+    use HasRepeaterBlocks;
 
     public $sortable = [
         'order_column_name' => 'repeater_block_order',

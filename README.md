@@ -144,6 +144,7 @@ The repeater block view will receive the following parameters:
 
 |Key|Content Type|Pupose|
 |---|----|---|
+|repeater|Object|The complete repeater base model|
 |repeaterKey|String|The key used to find the template|
 |repeaterShortKey|String|The short name of the model without namespace|
 |repeaterContent|Object|The full related model|
@@ -173,5 +174,40 @@ public function fields(Request $request)
             return $this->type->format;
         })->onlyOnIndex(),
     ], parent::fields($request))
+}
+```
+
+## Advanced Nested Repeater Blocks
+
+Any repeater block can have more nested repeater blocks if desired. In order to achieve this, the repeater block model must have a `types` method indicating what types can be added to the block. Each of these types must include a `sourceTypes` method, you should be able to simply reference the parent block `types`.
+
+```php
+class GridBlock extends Model
+{
+    use IsRepeaterBlock;
+    use HasRepeaterBlocks;
+
+    public static $repeaterBlockViewTemplate = 'repeaters.grid';
+
+    public static function types()
+    {
+        return [
+            \App\Nova\GridBlockItem::class,
+        ];
+    }
+}
+```
+
+```php
+class GridBlockItem extends Model
+{
+    use IsRepeaterBlock;
+
+    public static $repeaterBlockViewTemplate = 'repeaters.gridItem';
+
+    public static function sourceTypes()
+    {
+        return GridBlock::types();
+    }
 }
 ```
