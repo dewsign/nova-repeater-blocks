@@ -1,1 +1,1 @@
-{{ $content }}
+@parsedown($content)
