@@ -17,6 +17,7 @@ class RenderEngine
             $repeaterKey = str_replace('\\', '.', $repeaterType->name);
             $repeaterShortKey = $repeaterType->getShortName();
             $repeaterContent = $repeater->type;
+            $repeater = $repeater;
 
             return view()->first([
                 $repeaterType->hasMethod('getBlockViewTemplate')
@@ -27,6 +28,7 @@ class RenderEngine
                 'repeaters.default',
                 'nova-repeater-blocks::default'
                 ])->with([
+                    'repeater' => $repeater,
                     'repeaterKey' => $repeaterKey,
                     'repeaterShortKey' => $repeaterShortKey,
                     'repeaterContent' => $repeaterContent,
