@@ -131,7 +131,11 @@ class Repeater extends Resource
             return false;
         }
 
-        return method_exists($this->model()->whereId($resourceId)->first()->type, 'types');
+        if (!$model = $this->model()->whereId($resourceId)->first()) {
+            return false;
+        }
+
+        return method_exists($model->type, 'types');
     }
 
     /**
