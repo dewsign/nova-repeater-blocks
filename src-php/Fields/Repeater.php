@@ -41,6 +41,8 @@ class Repeater extends Resource
 
     public static $displayInNavigation = false;
 
+    public static $perPageViaRelationship = 100;
+
     /**
      * The columns that should be searched.
      *
