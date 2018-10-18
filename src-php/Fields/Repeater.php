@@ -9,16 +9,14 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\MorphMany;
-use Naxon\NovaFieldSortable\Sortable;
+use Dewsign\NovaFieldSortable\Sortable;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Dewsign\NovaRepeaterBlocks\Fields\Polymorphic;
-use Naxon\NovaFieldSortable\Concerns\SortsIndexEntries;
 use MichielKempen\NovaPolymorphicField\HasPolymorphicFields;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextBlock;
 
 class Repeater extends Resource
 {
-    use SortsIndexEntries;
     use HasPolymorphicFields;
 
     public static $defaultSortField = 'repeater_block_order';
