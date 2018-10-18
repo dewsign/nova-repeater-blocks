@@ -15,8 +15,7 @@
         "michielkempen/nova-polymorphic-field": "^1.0",
         "naxon/nova-field-sortable": "^1.0",
         "epartment/nova-dependency-container": "^1.1",
-        "laravel/nova": "^1.1",
-        "fico7489/laravel-pivot": "*"
+        "laravel/nova": "^1.1"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": ">=3.1"
