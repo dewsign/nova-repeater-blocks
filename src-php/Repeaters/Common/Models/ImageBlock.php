@@ -2,12 +2,10 @@
 
 namespace Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models;
 
+use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\RepeaterModel;
 use Illuminate\Database\Eloquent\Model;
-use Dewsign\NovaRepeaterBlocks\Traits\IsRepeaterBlock;
 
-class ImageBlock extends Model
+class ImageBlock extends RepeaterModel
 {
-    use IsRepeaterBlock;
-
     public static $repeaterBlockViewTemplate = 'nova-repeater-blocks::common.image';
 }
