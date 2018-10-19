@@ -5,13 +5,21 @@ namespace Dewsign\NovaRepeaterBlocks\Support;
 class RenderEngine
 {
     /**
-     * Renders the repeater fields passed in to the $repeaters parameter
+     * Renders the repeater fields passed in to the $model parameter
      *
-     * @param Array|Illuminate\Support\Collection $repeaters
+     * @param $model
      * @return string
      */
     public static function renderRepeaters($model)
     {
+        if (is_array($model)) {
+            return null;
+        }
+
+        if (!property_exists($model, 'repeaters')) {
+            return null;
+        }
+
         return $model->repeaters->map(function ($repeater) {
             $repeaterType = new \ReflectionClass($repeater->type);
             $repeaterKey = str_replace('\\', '.', $repeaterType->name);
