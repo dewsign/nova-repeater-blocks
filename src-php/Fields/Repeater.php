@@ -69,10 +69,10 @@ class Repeater extends Resource
     public function fields(Request $request)
     {
         return [
+            Sortable::make('Order', 'id'),
             MorphTo::make('Repeatable')->types(array_wrap(static::$morphTo))->onlyOnDetail(),
             Text::make('Name'),
             Polymorphic::make('Type')->types($request, $this->types($request))->hideTypeWhenUpdating(),
-            Sortable::make('Order', 'id'),
             $this->morphRepeaters($request),
         ];
     }
