@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\MorphTo;
 use Laravel\Nova\Fields\MorphMany;
 use Dewsign\NovaFieldSortable\Sortable;
+use Dewsign\NovaFieldSortable\IsSorted;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Dewsign\NovaRepeaterBlocks\Fields\Polymorphic;
 use MichielKempen\NovaPolymorphicField\HasPolymorphicFields;
@@ -17,9 +18,8 @@ use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextBlock;
 
 class Repeater extends Resource
 {
+    use IsSorted;
     use HasPolymorphicFields;
-
-    public static $defaultSortField = 'repeater_block_order';
 
     public static $morphTo = [];
 
@@ -69,7 +69,7 @@ class Repeater extends Resource
     public function fields(Request $request)
     {
         return [
-            Sortable::make('Order', 'id'),
+            Sortable::make('Sort', 'id'),
             MorphTo::make('Repeatable')->types(array_wrap(static::$morphTo))->onlyOnDetail(),
             Text::make('Name'),
             Polymorphic::make('Type')->types($request, $this->types($request))->hideTypeWhenUpdating(),
