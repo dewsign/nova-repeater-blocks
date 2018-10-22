@@ -12,15 +12,7 @@ class RenderEngine
      */
     public static function renderRepeaters($model)
     {
-        if (is_array($model)) {
-            return null;
-        }
-
-        if (!property_exists($model, 'repeaters')) {
-            return null;
-        }
-
-        return $model->repeaters->map(function ($repeater) {
+        return optional($model->repeaters)->map(function ($repeater) {
             $repeaterType = new \ReflectionClass($repeater->type);
             $repeaterKey = str_replace('\\', '.', $repeaterType->name);
             $repeaterShortKey = $repeaterType->getShortName();
