@@ -1,7 +1,7 @@
 {
     "name": "dewsign/nova-repeater-blocks",
-    "description": "Boilerplate repository for creating new Laravel or Javascript/Vue NPM packages",
-    "type": "boilerplate",
+    "description": "Enable repeatable content blocks through Polymorphic relationships on Nova resources.",
+    "type": "package",
     "license": "MIT",
     "authors": [
         {
