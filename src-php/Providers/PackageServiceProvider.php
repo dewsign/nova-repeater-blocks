@@ -48,8 +48,6 @@ class PackageServiceProvider extends ServiceProvider
         Nova::resources([
             Repeater::class,
         ]);
-
-        $this->app->register(EventServiceProvider::class);
     }
 
     /**
