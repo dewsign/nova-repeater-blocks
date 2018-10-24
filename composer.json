@@ -12,10 +12,10 @@
     "require": {
         "php": ">=7.0.0",
         "laravel/framework": ">=5.0.0",
-        "michielkempen/nova-polymorphic-field": "^1.0",
-        "naxon/nova-field-sortable": "^1.0",
+        "michielkempen/nova-polymorphic-field": "dev-master",
         "epartment/nova-dependency-container": "^1.1",
-        "laravel/nova": "^1.1"
+        "laravel/nova": "^1.1",
+        "dewsign/nova-field-sortable": "^0.1.0"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": ">=3.1"
@@ -31,5 +31,8 @@
                 "Dewsign\\NovaRepeaterBlocks\\Providers\\PackageServiceProvider"
             ]
         }
-    }
+    },
+    "repositories": [
+        { "type": "vcs", "url": "git@github.com:m2de/nova-polymorphic-field.git" }
+    ]
 }
