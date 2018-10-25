@@ -51,11 +51,11 @@ class Repeater extends Model implements Sortable
         });
 
         static::saved(function ($model) {
-            optional($model->repeatable)->searchable();
+            optional($model->repeatable)->save();
         });
 
         static::deleted(function ($model) {
-            optional($model->repeatable)->searchable();
+            optional($model->repeatable)->save();
         });
     }
 }

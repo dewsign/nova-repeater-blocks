@@ -59,6 +59,6 @@ trait IsRepeaterBlock
             return;
         }
 
-        $blockOwner->repeatable->searchable();
+        $blockOwner->repeatable->save();
     }
 }
