@@ -12,7 +12,7 @@
     "require": {
         "php": ">=7.0.0",
         "laravel/framework": ">=5.0.0",
-        "michielkempen/nova-polymorphic-field": "^1.0",
+        "michielkempen/nova-polymorphic-field": "dev-fix-belongsto",
         "naxon/nova-field-sortable": "^1.0"
     },
     "require-dev": {
@@ -29,5 +29,11 @@
                 "Dewsign\\NovaRepeaterBlocks\\Providers\\PackageServiceProvider"
             ]
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:m2de/nova-polymorphic-field.git"
+        }
+    ]
 }
