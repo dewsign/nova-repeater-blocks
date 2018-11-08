@@ -12,10 +12,11 @@
     "require": {
         "php": ">=7.0.0",
         "laravel/framework": ">=5.0.0",
-        "michielkempen/nova-polymorphic-field": "dev-master",
+        "michielkempen/nova-polymorphic-field": "dev-fix-belongsto",
         "epartment/nova-dependency-container": "^1.1",
-        "laravel/nova": "^1.1",
-        "dewsign/nova-field-sortable": "^0.1.0"
+        "laravel/nova": "*",
+        "dewsign/nova-field-sortable": "^0.1.0",
+        "parsedown/laravel": "^1.1"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": ">=3.1"

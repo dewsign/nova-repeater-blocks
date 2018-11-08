@@ -60,6 +60,16 @@ class Repeater extends Resource
         return __('Repeaters');
     }
 
+    public static function morphTo()
+    {
+        return [];
+    }
+
+    public static function getMorphToArray()
+    {
+        return array_merge(static::$morphTo, static::morphTo());
+    }
+
     /**
      * Get the fields displayed by the resource.
      *
@@ -70,7 +80,7 @@ class Repeater extends Resource
     {
         return [
             Sortable::make('Sort', 'id'),
-            MorphTo::make('Repeatable')->types(array_wrap(static::$morphTo))->onlyOnDetail(),
+            MorphTo::make('Repeatable')->types(array_wrap(static::getMorphToArray()))->onlyOnDetail(),
             Text::make('Name'),
             Polymorphic::make('Type')->types($request, $this->types($request))->hideTypeWhenUpdating(),
             $this->morphRepeaters($request),
