@@ -125,7 +125,7 @@ class Post extends Resource
 This package includes a blade helper to render repeater blocks on a model. Simply pass your entire model into the helper to render all the repeaters in their sorting order.
 
 ```php
-@repeaterBlocks($model)
+@repeaterblocks($model)
 ```
 
 The following naming sequence will be used to find the correct template to render. The first view found will be used. The namespace is a slugified version of the full class namespace of the model
