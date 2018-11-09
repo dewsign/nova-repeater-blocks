@@ -24,4 +24,28 @@ class Polymorphic extends PolymorphicField
 
         return $this;
     }
+
+    /**
+     * Extending the default method in order to add a try-catch statement. This has been PR'd to the package
+     * but it has not yet been merged. Ideally we remove this overload when a fix has been implemented.
+     */
+    public function resolveForDisplay($model, $attribute = null)
+    {
+        parent::resolveForDisplay($model, $this->attribute.'_type');
+ 
+        foreach ($this->meta['types'] as $index => $type) {
+            $this->meta['types'][$index]['active'] =
+                $this->mapToKey($type['value']) == $model->{$this->attribute . '_type'};
+
+            foreach ($type['fields'] as $field) {
+                $field->resolveForDisplay($model->{$this->attribute});
+
+                try {
+                    $field->resolveForDisplay($model->{$this->attribute});
+                } catch (\Exception $e) {
+                    //
+                }
+            }
+        }
+    }
 }
