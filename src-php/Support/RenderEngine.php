@@ -12,7 +12,7 @@ class RenderEngine
      */
     public static function renderRepeaters($model)
     {
-        if(!array_get($model, 'repeaters')) {
+        if (!array_get($model, 'repeaters')) {
             return null;
         }
 
