@@ -67,7 +67,7 @@ class Repeater extends Resource
 
     public static function getMorphToArray()
     {
-        return array_merge(static::$morphTo, static::morphTo());
+        return array_merge(static::$morphTo, array_wrap(static::morphTo()));
     }
 
     /**

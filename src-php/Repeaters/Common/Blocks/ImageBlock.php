@@ -5,7 +5,6 @@ namespace Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks;
 use Laravel\Nova\Resource;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Image;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Dewsign\NovaRepeaterBlocks\Traits\IsRepeaterBlockResource;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
@@ -43,7 +42,7 @@ class ImageBlock extends Resource
     public function fields(Request $request)
     {
         return [
-            Image::make('Image')->disk('public'),
+            config('repeater-blocks.images.field')::make('Image')->disk(config('repeater-blocks.images.disk')),
             Text::make('Alt Content')->rules('required', 'max:254'),
         ];
     }
