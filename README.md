@@ -16,9 +16,7 @@ Run the migrations. Note: This package uses a single table to manage all polymor
 php artisan migrate
 ```
 
-## Usage
-
-### Nova UI
+## Nova UI
 
 For this readme we will use a basic Blog example where a Blog Post is generated from multiple Rich Text Editor style repeatable content blocks (e.g. Text, Image.)
 
@@ -120,7 +118,7 @@ class Post extends Resource
 }
 ```
 
-### Front-end blade output
+## Front-end blade output
 
 This package includes a blade helper to render repeater blocks on a model. Simply pass your entire model into the helper to render all the repeaters in their sorting order.
 
