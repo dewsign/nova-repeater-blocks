@@ -31,7 +31,11 @@ class Polymorphic extends PolymorphicField
      */
     public function resolveForDisplay($model, $attribute = null)
     {
-        parent::resolveForDisplay($model, $this->attribute.'_type');
+        try {
+            parent::resolveForDisplay($model, $this->attribute.'_type');
+        } catch (\Exception $e) {
+            //
+        }
  
         foreach ($this->meta['types'] as $index => $type) {
             $this->meta['types'][$index]['active'] =
