@@ -99,7 +99,7 @@ class Repeater extends Resource
             return [];
         }
 
-        $type = $this->model()->whereId($resourceId)->first()->type;
+        $type = optional($this->model()->whereId($resourceId)->first())->type;
 
         if (method_exists($type, 'types')) {
             return $type::types();
