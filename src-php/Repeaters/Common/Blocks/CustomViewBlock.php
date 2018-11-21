@@ -4,7 +4,8 @@ namespace Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks;
 
 use Laravel\Nova\Resource;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Select;
+use Dewsign\NovaRepeaterBlocks\Models\Repeater;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Dewsign\NovaRepeaterBlocks\Traits\IsRepeaterBlockResource;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
@@ -40,8 +41,13 @@ class CustomViewBlock extends Resource
 
     public function fields(Request $request)
     {
+        $options = Repeater::customTemplates();
+
         return [
-            Text::make('Template Name')->rules('required', 'max:254'),
+            Select::make('Template Name')
+                ->options($options)
+                ->displayUsingLabels()
+                ->hideFromIndex(),
         ];
     }
 }
