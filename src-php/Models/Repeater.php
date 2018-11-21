@@ -2,6 +2,7 @@
 
 namespace Dewsign\NovaRepeaterBlocks\Models;
 
+use Illuminate\Support\Facades\File;
 use Spatie\EloquentSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EloquentSortable\SortableTrait;
@@ -57,5 +58,33 @@ class Repeater extends Model implements Sortable
         static::deleted(function ($model) {
             optional($model->repeatable)->save();
         });
+    }
+
+    public static function customTemplates()
+    {
+        $templatePath = static::getTemplatePath();
+        $templates = File::exists($templatePath) ? File::files($templatePath) : null;
+
+        return collect($templates)->mapWithKeys(function ($file) {
+            $filename = $file->getFilename();
+
+            return [
+                str_replace('.blade.php', '', $filename) => static::getPrettyFilename($filename),
+            ];
+        })->all();
+    }
+
+    private static function getTemplatePath()
+    {
+        $path = str_replace('.', '/', config('repeater-blocks.path'));
+
+        return resource_path('views/' . $path);
+    }
+
+    private static function getPrettyFilename($filename)
+    {
+        $basename = str_replace('.blade.php', '', $filename);
+
+        return title_case(str_replace('-', ' ', $basename));
     }
 }
