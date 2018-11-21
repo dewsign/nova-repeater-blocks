@@ -175,6 +175,12 @@ public function fields(Request $request)
 }
 ```
 
+## Custom View Block
+
+The custom view block allows you to use an HTML view template as a repeater block.  To use this block, the custom templates you create must be stored in the path definited in the `repeater-blocks` configuration file.  By default, the path for your custom templates is `resources/views/repeaters/custom`.
+
+Once your custom views have been created, they will be available in the 'Template Name' dropdown list when you select the 'Custom View' repeater type.
+
 ## Advanced Nested Repeater Blocks
 
 Any repeater block can have more nested repeater blocks if desired. In order to achieve this, the repeater block model must have a `types` method indicating what types can be added to the block. Each of these types must include a `sourceTypes` method, you should be able to simply reference the parent block `types`.
