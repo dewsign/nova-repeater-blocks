@@ -6,10 +6,12 @@ use Laravel\Nova\Resource;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Textarea;
 use Dewsign\NovaRepeaterBlocks\Traits\IsRepeaterBlockResource;
+use Dewsign\NovaRepeaterBlocks\Traits\ResourceCanBeContainerised;
 
 class TextareaBlock extends Resource
 {
     use IsRepeaterBlockResource;
+    use ResourceCanBeContainerised;
 
     public static $model = 'Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextareaBlock';
 

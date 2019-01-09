@@ -9,11 +9,13 @@ use Laravel\Nova\Fields\Textarea;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Dewsign\NovaRepeaterBlocks\Traits\IsRepeaterBlockResource;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
+use Dewsign\NovaRepeaterBlocks\Traits\ResourceCanBeContainerised;
 
 class MarkdownBlock extends Resource
 {
     use HasDependencies;
     use IsRepeaterBlockResource;
+    use ResourceCanBeContainerised;
 
     public static $model = 'Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\MarkdownBlock';
 
