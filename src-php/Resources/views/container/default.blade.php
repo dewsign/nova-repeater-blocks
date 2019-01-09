@@ -1,3 +1,3 @@
 <div>
-    @repeaterblocks($repeaters)
+    @repeaterblocks($repeater)
 </div>
