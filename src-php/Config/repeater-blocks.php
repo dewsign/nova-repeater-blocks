@@ -5,6 +5,13 @@ return [
     'images' => [
         'field' => 'Laravel\Nova\Fields\Image',
         'disk' => 'public',
+        'processors' => [
+            'default' => Dewsign\NovaRepeaterBlocks\Processors\ImageProcessor::class,
+            'photograph' => Dewsign\NovaRepeaterBlocks\Processors\ImageProcessor::class,
+            'person' => Dewsign\NovaRepeaterBlocks\Processors\ImageProcessor::class,
+            'people' => Dewsign\NovaRepeaterBlocks\Processors\ImageProcessor::class,
+            'logo' => Dewsign\NovaRepeaterBlocks\Processors\ImageProcessor::class,
+        ],
     ],
     'repeaters' => [
         Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextBlock::class,

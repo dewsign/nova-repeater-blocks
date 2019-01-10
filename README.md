@@ -187,6 +187,16 @@ All the default blocks included can be Containerised. Essentially a way of group
 
 You can allow custom repeater blocks to be containerised by adding the `CanBeContainerised` trait to the model and `ResourceCanBeContainerised` to the Block resource.
 
+## Images
+
+### Styles
+
+You can create multiple image styles by adding new templates to the `/views/vendor/nova-repeater-blocks/common/image` resource folder. The system will fallback to the default style if a view is not found.
+
+### Image Procesing
+
+The config provides an easy way to customise the Image Processor. Create a new class with a compatible get method which can return the processed image url. Each Item template can have a unique image processor. Some common template names are included but they all render the default template (typically sufficient when combined with the Image Processor).
+
 ## Advanced Nested Repeater Blocks
 
 Any repeater block can have more nested repeater blocks if desired. In order to achieve this, the repeater block model must have a `types` method indicating what types can be added to the block. Each of these types must include a `sourceTypes` method, you should be able to simply reference the parent block `types`.
