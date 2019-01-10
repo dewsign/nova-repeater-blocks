@@ -15,7 +15,7 @@ class ContainerBlock extends Model
     use HasRepeaterBlocks;
     use CanBeContainerised;
 
-    public static $repeaterBlockViewTemplate = 'nova-repeater-blocks::container.default';
+    public static $repeaterBlockViewTemplate = 'nova-repeater-blocks::container';
 
     public static function types()
     {
