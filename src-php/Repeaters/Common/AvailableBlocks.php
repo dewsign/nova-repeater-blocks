@@ -2,23 +2,31 @@
 
 namespace Dewsign\NovaRepeaterBlocks\Repeaters\Common;
 
-use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextBlock;
-use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\ImageBlock;
-use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextareaBlock;
-use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\MarkdownBlock;
-use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\CustomViewBlock;
+use Dewsign\NovaRepeaterBlocks\Traits\ResourceCanBeContainerised;
 
 class AvailableBlocks
 {
+    /**
+     * Return all available blocks
+     *
+     * @return array
+     */
     public static function all()
     {
-        return [
-            TextBlock::class,
-            TextareaBlock::class,
-            ImageBlock::class,
-            CustomViewBlock::class,
-            MarkdownBlock::class,
-        ];
+        return config('nova-repeater-blocks.repeaters');
+    }
+
+    /**
+     * Return the blocks which can be included in containers
+     *
+     * @return array
+     */
+    public static function containable()
+    {
+        return collect(config('nova-repeater-blocks.repeaters'))
+            ->filter(function ($block) {
+                return in_array(ResourceCanBeContainerised::class, class_uses($block));
+            })->toArray();
     }
 
     public static function random()

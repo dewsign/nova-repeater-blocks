@@ -4,20 +4,20 @@ namespace Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks;
 
 use Laravel\Nova\Resource;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Markdown;
-use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\Select;
+use Dewsign\NovaRepeaterBlocks\Models\Repeater;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Dewsign\NovaRepeaterBlocks\Traits\IsRepeaterBlockResource;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Dewsign\NovaRepeaterBlocks\Traits\ResourceCanBeContainerised;
 
-class MarkdownBlock extends Resource
+class ContainerBlock extends Resource
 {
     use HasDependencies;
     use IsRepeaterBlockResource;
     use ResourceCanBeContainerised;
 
-    public static $model = 'Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\MarkdownBlock';
+    public static $model = 'Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\ContainerBlock';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -32,18 +32,25 @@ class MarkdownBlock extends Resource
      * @var array
      */
     public static $search = [
-        'content',
+        'id',
+        'template',
     ];
 
     public static function label()
     {
-        return __('Markdown');
+        return __('Containers');
     }
 
     public function fields(Request $request)
     {
+        $packageTemplates = Repeater::customTemplates(__DIR__ . '/../../../Resources/views/container');
+        $appTemplates = Repeater::customTemplates(resource_path('views/vendor/nova-repeater-blocks/container'));
+
         return [
-            Markdown::make('Content')->rules('required'),
+            Select::make('Template')
+                ->options(array_merge($packageTemplates, $appTemplates))
+                ->displayUsingLabels()
+                ->hideFromIndex(),
         ];
     }
 }

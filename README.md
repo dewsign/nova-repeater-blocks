@@ -181,6 +181,12 @@ The custom view block allows you to use an HTML view template as a repeater bloc
 
 Once your custom views have been created, they will be available in the 'Template Name' dropdown list when you select the 'Custom View' repeater type.
 
+## Containers
+
+All the default blocks included can be Containerised. Essentially a way of grouping multiple repeaters in a container. You can create new container types by creating new templates inside the `resources/views/vendor/nova-repeater-blocks/container` directory. These will automatically appear in the Select options.
+
+You can allow custom repeater blocks to be containerised by adding the `CanBeContainerised` trait to the model and `ResourceCanBeContainerised` to the Block resource.
+
 ## Advanced Nested Repeater Blocks
 
 Any repeater block can have more nested repeater blocks if desired. In order to achieve this, the repeater block model must have a `types` method indicating what types can be added to the block. Each of these types must include a `sourceTypes` method, you should be able to simply reference the parent block `types`.

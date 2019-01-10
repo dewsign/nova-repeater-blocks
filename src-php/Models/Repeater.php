@@ -60,9 +60,9 @@ class Repeater extends Model implements Sortable
         });
     }
 
-    public static function customTemplates()
+    public static function customTemplates($path = null)
     {
-        $templatePath = static::getTemplatePath();
+        $templatePath = $path ?? static::getTemplatePath();
         $templates = File::exists($templatePath) ? File::files($templatePath) : null;
 
         return collect($templates)->mapWithKeys(function ($file) {

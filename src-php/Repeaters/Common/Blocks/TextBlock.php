@@ -9,11 +9,13 @@ use Laravel\Nova\Fields\Select;
 use Epartment\NovaDependencyContainer\HasDependencies;
 use Dewsign\NovaRepeaterBlocks\Traits\IsRepeaterBlockResource;
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
+use Dewsign\NovaRepeaterBlocks\Traits\ResourceCanBeContainerised;
 
 class TextBlock extends Resource
 {
     use HasDependencies;
     use IsRepeaterBlockResource;
+    use ResourceCanBeContainerised;
 
     public static $model = 'Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextBlock';
 
