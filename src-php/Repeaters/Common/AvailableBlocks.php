@@ -13,7 +13,7 @@ class AvailableBlocks
      */
     public static function all()
     {
-        return config('nova-repeater-blocks.repeaters');
+        return config('repeater-blocks.repeaters');
     }
 
     /**
@@ -23,7 +23,7 @@ class AvailableBlocks
      */
     public static function containable()
     {
-        return collect(config('nova-repeater-blocks.repeaters'))
+        return collect(config('repeater-blocks.repeaters'))
             ->filter(function ($block) {
                 return in_array(ResourceCanBeContainerised::class, class_uses($block));
             })->toArray();

@@ -7,11 +7,11 @@ return [
         'disk' => 'public',
     ],
     'repeaters' => [
-        Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextBlock::class,
-        Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\ImageBlock::class,
-        Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\MarkdownBlock::class,
-        Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\TextareaBlock::class,
-        Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\ContainerBlock::class,
-        Dewsign\NovaRepeaterBlocks\Repeaters\Common\Models\CustomViewBlock::class,
+        Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextBlock::class,
+        Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\ImageBlock::class,
+        Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\MarkdownBlock::class,
+        Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextareaBlock::class,
+        Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\ContainerBlock::class,
+        Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\CustomViewBlock::class,
     ],
 ];
