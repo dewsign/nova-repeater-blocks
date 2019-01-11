@@ -1,4 +1,4 @@
-<div class="image--{{ $style }}">
+<div class="image image--{{ $style }}">
     @isset($link)
         <a href="{{ $link }}">
     @endisset
