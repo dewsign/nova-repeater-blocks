@@ -7,11 +7,13 @@ use Spatie\EloquentSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\EloquentSortable\SortableTrait;
 use Dewsign\NovaRepeaterBlocks\Traits\HasRepeaterBlocks;
+use Dewsign\NovaRepeaterBlocks\Traits\ResolvesRepeaterTypes;
 
 class Repeater extends Model implements Sortable
 {
     use SortableTrait;
     use HasRepeaterBlocks;
+    use ResolvesRepeaterTypes;
 
     public $sortable = [
         'order_column_name' => 'repeater_block_order',
