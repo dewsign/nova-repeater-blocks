@@ -21,4 +21,9 @@ class ContainerBlock extends Model
     {
         return AvailableBlocks::containable();
     }
+
+    public function getExtraInfo()
+    {
+        return $this->template;
+    }
 }
