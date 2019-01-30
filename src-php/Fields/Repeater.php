@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\MorphMany;
 use Dewsign\NovaFieldSortable\Sortable;
 use Dewsign\NovaFieldSortable\IsSorted;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Dewsign\NovaRepeaterBlocks\Models\Repeater as BaseRepeater;
 use Dewsign\NovaRepeaterBlocks\Fields\Polymorphic;
 use MichielKempen\NovaPolymorphicField\HasPolymorphicFields;
 use Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\TextBlock;
@@ -78,13 +79,26 @@ class Repeater extends Resource
      */
     public function fields(Request $request)
     {
-        return [
+        return array_merge([
             Sortable::make('Sort', 'id'),
             MorphTo::make('Repeatable')->types(array_wrap(static::getMorphToArray()))->onlyOnDetail(),
             Text::make('Name'),
             Polymorphic::make('Type')->types($request, $this->types($request))->hideTypeWhenUpdating(),
             $this->morphRepeaters($request),
-        ];
+        ], $this->extraInfo($request));
+    }
+
+    public function extraInfo(Request $request)
+    {
+        $infoValue = '';
+
+        if (method_exists($this->type, 'getExtraInfo')) {
+            $infoValue = $this->type->getExtraInfo();
+        }
+
+        return array_wrap(Text::make(__('Extra Info'), function () use ($infoValue) {
+            return BaseRepeater::getPrettyFilename($infoValue);
+        })->onlyOnIndex());
     }
 
     /**

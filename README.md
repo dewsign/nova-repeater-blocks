@@ -175,6 +175,19 @@ public function fields(Request $request)
 }
 ```
 
+There is an included `getExtraInfo()` function that allows you to pass in any information you would like displayed on the Repeaters index view.
+
+To pass data into this, call `getExtraInfo()` on your repeater resource.
+
+```php
+// app/Repeaters/Common/Blocks/SampleRepeaterBlock.php
+
+    public function getExtraInfo()
+    {
+        return $this->template;
+    }
+```
+
 ## Custom View Block
 
 The custom view block allows you to use an HTML view template as a repeater block.  To use this block, the custom templates you create must be stored in the path definited in the `repeater-blocks` configuration file.  By default, the path for your custom templates is `resources/views/repeaters/custom`.

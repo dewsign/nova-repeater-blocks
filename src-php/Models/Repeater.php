@@ -83,7 +83,7 @@ class Repeater extends Model implements Sortable
         return resource_path('views/' . $path);
     }
 
-    private static function getPrettyFilename($filename)
+    public static function getPrettyFilename($filename)
     {
         $basename = str_replace('.blade.php', '', $filename);
 
