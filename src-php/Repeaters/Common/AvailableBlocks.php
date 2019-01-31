@@ -29,9 +29,24 @@ class AvailableBlocks
             })->toArray();
     }
 
+    public static function seedable()
+    {
+        $collected = collect(config('repeater-blocks.repeaters'))
+            ->filter(function ($block) {
+                try {
+                    return factory($block::$model)->make();
+                }
+                catch(\Exception $e) {
+                    return false;
+                }
+            })->toArray();
+
+        return $collected;
+    }
+
     public static function random()
     {
-        $all = static::all();
+        $all = static::seedable();
         return $all[array_rand($all)];
     }
 }
