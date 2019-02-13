@@ -140,7 +140,7 @@ The following naming sequence will be used to find the correct template to rende
 
 The repeater block view will receive the following parameters:
 
-|Key|Content Type|Pupose|
+|Key|Content Type|Purpose|
 |---|----|---|
 |repeater|Object|The complete repeater base model|
 |repeaterKey|String|The key used to find the template|
@@ -190,7 +190,7 @@ To pass data into this, call `getExtraInfo()` on your repeater resource.
 
 ## Custom View Block
 
-The custom view block allows you to use an HTML view template as a repeater block.  To use this block, the custom templates you create must be stored in the path definited in the `repeater-blocks` configuration file.  By default, the path for your custom templates is `resources/views/repeaters/custom`.
+The custom view block allows you to use an HTML view template as a repeater block.  To use this block, the custom templates you create must be stored in the path defined in the `repeater-blocks` configuration file.  By default, the path for your custom templates is `resources/views/repeaters/custom`.
 
 Once your custom views have been created, they will be available in the 'Template Name' dropdown list when you select the 'Custom View' repeater type.
 
