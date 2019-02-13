@@ -175,7 +175,7 @@ public function fields(Request $request)
 }
 ```
 
-There is an included `getExtraInfo()` function that allows you to pass in any information you would like displayed on the Repeaters index view.
+There is an included `getExtraInfo()` function that allows you to pass in any information you would like displayed on the Repeaters index view inside the Laravel Nova Admin UI.
 
 To pass data into this, call `getExtraInfo()` on your repeater resource.
 
@@ -206,7 +206,7 @@ You can allow custom repeater blocks to be containerised by adding the `CanBeCon
 
 You can create multiple image styles by adding new templates to the `/views/vendor/nova-repeater-blocks/common/image` resource folder. The system will fallback to the default style if a view is not found.
 
-### Image Procesing
+### Image Processing
 
 The config provides an easy way to customise the Image Processor. Create a new class with a compatible get method which can return the processed image url. Each Item template can have a unique image processor. Some common template names are included but they all render the default template (typically sufficient when combined with the Image Processor).
 
