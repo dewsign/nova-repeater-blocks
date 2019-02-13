@@ -30,4 +30,18 @@ trait ResolvesRepeaterTypes
 
         return $this->type->resolveView($this);
     }
+
+    /**
+     * Make a desired model accessible from a repeater without knowing its name or type.
+     *
+     * @return mixed
+     */
+    public function getModelAttribute()
+    {
+        if (!method_exists($this->type, 'resolveModel')) {
+            return null;
+        }
+
+        return $this->type->resolveModel($this);
+    }
 }
