@@ -140,7 +140,7 @@ The following naming sequence will be used to find the correct template to rende
 
 The repeater block view will receive the following parameters:
 
-|Key|Content Type|Pupose|
+|Key|Content Type|Purpose|
 |---|----|---|
 |repeater|Object|The complete repeater base model|
 |repeaterKey|String|The key used to find the template|
@@ -175,7 +175,7 @@ public function fields(Request $request)
 }
 ```
 
-There is an included `getExtraInfo()` function that allows you to pass in any information you would like displayed on the Repeaters index view.
+There is an included `getExtraInfo()` function that allows you to pass in any information you would like displayed on the Repeaters index view inside the Laravel Nova Admin UI.
 
 To pass data into this, call `getExtraInfo()` on your repeater resource.
 
@@ -190,7 +190,7 @@ To pass data into this, call `getExtraInfo()` on your repeater resource.
 
 ## Custom View Block
 
-The custom view block allows you to use an HTML view template as a repeater block.  To use this block, the custom templates you create must be stored in the path definited in the `repeater-blocks` configuration file.  By default, the path for your custom templates is `resources/views/repeaters/custom`.
+The custom view block allows you to use an HTML view template as a repeater block.  To use this block, the custom templates you create must be stored in the path defined in the `repeater-blocks` configuration file.  By default, the path for your custom templates is `resources/views/repeaters/custom`.
 
 Once your custom views have been created, they will be available in the 'Template Name' dropdown list when you select the 'Custom View' repeater type.
 
@@ -206,7 +206,7 @@ You can allow custom repeater blocks to be containerised by adding the `CanBeCon
 
 You can create multiple image styles by adding new templates to the `/views/vendor/nova-repeater-blocks/common/image` resource folder. The system will fallback to the default style if a view is not found.
 
-### Image Procesing
+### Image Processing
 
 The config provides an easy way to customise the Image Processor. Create a new class with a compatible get method which can return the processed image url. Each Item template can have a unique image processor. Some common template names are included but they all render the default template (typically sufficient when combined with the Image Processor).
 
