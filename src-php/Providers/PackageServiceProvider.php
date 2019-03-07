@@ -29,6 +29,7 @@ class PackageServiceProvider extends ServiceProvider
         $this->bootCommands();
         $this->publishDatabaseFiles();
         $this->registerMorphmaps();
+        $this->registerBladeExtensions();
     }
 
     /**
@@ -38,8 +39,6 @@ class PackageServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerBladeExtensions();
-
         $this->mergeConfigFrom(
             $this->getConfigsPath(),
             'repeater-blocks'
@@ -134,7 +133,7 @@ class PackageServiceProvider extends ServiceProvider
 
     public function registerBladeExtensions()
     {
-        Blade::directive('repeaterblocks', function ($expression = []) {
+        Blade::directive('repeaterblocks', function ($expression) {
             return "<?php echo \Dewsign\NovaRepeaterBlocks\Support\RenderEngine::renderRepeaters({$expression}); ?>";
         });
     }
