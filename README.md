@@ -175,6 +175,8 @@ public function fields(Request $request)
 }
 ```
 
+**NOTE:** Laravel 2.0 introduced a `reverse` meta field which throws an error when using `BelongsTo` fields in Repeaters. You'd typically never have a reverse relationship on nested repeaters so we avoid this situation by using the include `RepeatableBelongsTo` field instead.
+
 There is an included `getExtraInfo()` function that allows you to pass in any information you would like displayed on the Repeaters index view inside the Laravel Nova Admin UI.
 
 To pass data into this, call `getExtraInfo()` on your repeater resource.
@@ -200,7 +202,7 @@ All the default blocks included can be Containerised. Essentially a way of group
 
 You can allow custom repeater blocks to be containerised by adding the `CanBeContainerised` trait to the model and `ResourceCanBeContainerised` to the Block resource.
 
-## Images
+## Images
 
 ### Styles
 
@@ -209,6 +211,41 @@ You can create multiple image styles by adding new templates to the `/views/vend
 ### Image Processing
 
 The config provides an easy way to customise the Image Processor. Create a new class with a compatible get method which can return the processed image url. Each Item template can have a unique image processor. Some common template names are included but they all render the default template (typically sufficient when combined with the Image Processor).
+
+Here is an example of a custom Image Processor to replace the defaults
+
+```php
+namespace App\Processors;
+
+use Illuminate\Support\Facades\Storage;
+
+class DefaultImageProcessor
+{
+    public static function get(string $image, array $params = [])
+    {
+        // Process the image and perform any special tasks before returning the final Image URL.
+
+        return $myImageURL;
+    }
+}
+```
+
+You can now assign this processor to any of the default (and custom) image styles in the `repeater-blocks` config.
+
+```php
+return [
+    ...
+    'images' => [
+        ...
+        'processors' => [
+            'default' => App\Processors\DefaultImageProcessor::class,
+        ],
+    ],
+    ...
+];
+```
+
+Within your views, on repeater blocks you can use the `default_iamge` helper or you can use ImageProcessors directly to process any image by calling `DefaultImageProcessor::get('path/to/image')`.
 
 ## Advanced Nested Repeater Blocks
 
