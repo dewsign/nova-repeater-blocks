@@ -17,6 +17,18 @@ class ImageBlock extends Model
         'default_image',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($model) {
+            return config(
+                "repeater-blocks.images.processors.{$model->style}",
+                config("repeater-blocks.images.processors.default")
+            )::delete($model->image);
+        });
+    }
+
     public function getDefaultImageAttribute()
     {
         return $this->getImage();
