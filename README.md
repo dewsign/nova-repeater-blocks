@@ -218,14 +218,20 @@ Here is an example of a custom Image Processor to replace the defaults
 namespace App\Processors;
 
 use Illuminate\Support\Facades\Storage;
+use Dewsign\NovaRepeaterBlocks\Processors\ImageProcessor;
 
-class DefaultImageProcessor
+class DefaultImageProcessor extends ImageProcessor
 {
     public static function get(string $image, array $params = [])
     {
         // Process the image and perform any special tasks before returning the final Image URL.
 
         return $myImageURL;
+    }
+
+    public static function delete(string $image)
+    {
+        // Handle the deletion of the image (e.g. from a remote filesystem)
     }
 }
 ```
