@@ -23,7 +23,7 @@ class RepeatableBelongsTo extends BelongsTo
             'belongsToRelationship' => $this->belongsToRelationship,
             'belongsToId' => $this->belongsToId,
             'searchable' => $this->searchable,
-            'viewable' => $this->viewable,
+            'viewable' => $this->viewable ?? true,
             'reverse' => false,
         ], $this->meta);
     }
