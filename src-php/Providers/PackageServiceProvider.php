@@ -136,6 +136,10 @@ class PackageServiceProvider extends ServiceProvider
         Blade::directive('repeaterblocks', function ($expression) {
             return "<?php echo \Dewsign\NovaRepeaterBlocks\Support\RenderEngine::renderRepeaters({$expression}); ?>";
         });
+
+        Blade::directive('repeaterjson', function ($expression) {
+            return "<?php echo json_encode(\Dewsign\NovaRepeaterBlocks\Support\RenderEngine::renderRepeatersJson({$expression})); ?>";
+        });
     }
 
     private function registerMorphmaps()
