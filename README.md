@@ -158,6 +158,12 @@ Typically the easiest way to access the data in your repeater view is to access 
 </{{ $format }}>
 ```
 
+There is also a helper for json output (Handy for Javascript front ends). Same as before, just pass the model in to generate json output.
+
+```php
+@repeaterjson($model)
+```
+
 ## Customisation
 
 If you want to display additional fields in the repeaters index view you can merge computed properties into the fields method. Be sure to include the parent fields though. It is best to include the custom fields at the beginning of the fields array.

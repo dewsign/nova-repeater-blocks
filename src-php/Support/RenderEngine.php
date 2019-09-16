@@ -40,4 +40,21 @@ class RenderEngine
                 ->render();
         })->implode('');
     }
+
+    /**
+     * Renders the repeater fields passed in to the $model parameter as json (Ideal for JavaScript front ends.)
+     *
+     * @param $model
+     * @return array
+     */
+    public static function renderRepeatersJson($model)
+    {
+        return optional($model->repeaters)->map(function ($repeater) {
+            $repeaterContent = $repeater->type;
+
+            return [
+                $repeaterContent,
+            ];
+        });
+    }
 }
