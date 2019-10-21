@@ -4,6 +4,7 @@ namespace Dewsign\NovaRepeaterBlocks\Fields;
 
 use Laravel\Nova\Resource;
 use Laravel\Nova\Fields\ID;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
@@ -68,7 +69,7 @@ class Repeater extends Resource
 
     public static function getMorphToArray()
     {
-        return array_merge(static::$morphTo, array_wrap(static::morphTo()));
+        return array_merge(static::$morphTo, Arr::wrap(static::morphTo()));
     }
 
     /**
@@ -81,7 +82,7 @@ class Repeater extends Resource
     {
         return array_merge([
             Sortable::make('Sort', 'id'),
-            MorphTo::make('Repeatable')->types(array_wrap(static::getMorphToArray()))->onlyOnDetail(),
+            MorphTo::make('Repeatable')->types(Arr::wrap(static::getMorphToArray()))->onlyOnDetail(),
             Text::make('Name'),
             Polymorphic::make('Type')->types($request, $this->types($request))->hideTypeWhenUpdating(),
             $this->morphRepeaters($request),
@@ -96,7 +97,7 @@ class Repeater extends Resource
             $infoValue = $this->type->getExtraInfo();
         }
 
-        return array_wrap(Text::make(__('Extra Info'), function () use ($infoValue) {
+        return Arr::wrap(Text::make(__('Extra Info'), function () use ($infoValue) {
             return BaseRepeater::getPrettyFilename($infoValue);
         })->onlyOnIndex());
     }
@@ -176,7 +177,7 @@ class Repeater extends Resource
 
         parse_str(parse_url($request->server->get('HTTP_REFERER'), PHP_URL_QUERY), $params);
 
-        if ($resourceId = array_get($params, 'viaResourceId')) {
+        if ($resourceId = Arr::get($params, 'viaResourceId')) {
             return $resourceId;
         };
 

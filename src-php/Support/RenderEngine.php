@@ -2,6 +2,8 @@
 
 namespace Dewsign\NovaRepeaterBlocks\Support;
 
+use Illuminate\Support\Arr;
+
 class RenderEngine
 {
     /**
@@ -12,7 +14,7 @@ class RenderEngine
      */
     public static function renderRepeaters($model)
     {
-        if (!array_get($model, 'repeaters')) {
+        if (!Arr::get($model, 'repeaters')) {
             return null;
         }
 
