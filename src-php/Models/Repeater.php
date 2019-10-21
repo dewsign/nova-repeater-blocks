@@ -2,6 +2,7 @@
 
 namespace Dewsign\NovaRepeaterBlocks\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Spatie\EloquentSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
@@ -87,6 +88,6 @@ class Repeater extends Model implements Sortable
     {
         $basename = str_replace('.blade.php', '', $filename);
 
-        return title_case(str_replace('-', ' ', $basename));
+        return Str::title(str_replace('-', ' ', $basename));
     }
 }
