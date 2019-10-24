@@ -36,6 +36,7 @@ class ImageBlock extends Resource
         'id',
         'image',
         'alt_content',
+        'caption',
     ];
 
     public static function label()
@@ -55,6 +56,7 @@ class ImageBlock extends Resource
                 ->hideFromIndex(),
             config('repeater-blocks.images.field')::make('Image')->disk(config('repeater-blocks.images.disk')),
             Text::make('Alt Content')->rules('required', 'max:254'),
+            Text::make('Caption')->rules('nullable', 'max:254'),
             Text::make('Link')->rules('nullable'),
         ];
     }
