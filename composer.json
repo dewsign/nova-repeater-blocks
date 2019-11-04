@@ -16,7 +16,8 @@
         "epartment/nova-dependency-container": "^1.1",
         "laravel/nova": "*",
         "dewsign/nova-field-sortable": "^0.2.0",
-        "parsedown/laravel": "^1.1"
+        "parsedown/laravel": "^1.1",
+        "laravel/helpers": "^1.1"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": ">=3.1"
@@ -32,5 +33,11 @@
                 "Dewsign\\NovaRepeaterBlocks\\Providers\\PackageServiceProvider"
             ]
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://nova.laravel.com"
+        }
+    ]
 }
