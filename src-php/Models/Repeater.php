@@ -40,6 +40,17 @@ class Repeater extends Model implements Sortable
     {
         return $this->morphTo();
     }
+    
+    
+    /**
+     * Alias title to the name field to avoid some naming errors only if no native title exists
+     *
+     * @return string
+     */
+    public function getTitleAttribute()
+    {
+        return $this->title ?? $this->name;
+    }
 
     /**
      * Hook into model boot events to ensure scout search indexes are updated
