@@ -1,6 +1,6 @@
 {
     "name": "@dewsign/nova-repeater-blocks",
-    "version": "1.8.3",
+    "version": "1.8.4",
     "description": "Boilerplate repository for creating new Laravel or Javascript/Vue NPM packages",
     "main": "dist-js/index.js",
     "scripts": {
