@@ -124,6 +124,9 @@ This package includes a blade helper to render repeater blocks on a model. Simpl
 
 ```php
 @repeaterblocks($model)
+
+// Optionally wrap each repeater with before and after code.
+@repeaterblocks($model, '<div>', '</div>')
 ```
 
 The following naming sequence will be used to find the correct template to render. The first view found will be used. The namespace is a slugified version of the full class namespace of the model

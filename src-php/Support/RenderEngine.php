@@ -7,25 +7,28 @@ use Illuminate\Support\Arr;
 class RenderEngine
 {
     /**
-     * Renders the repeater fields passed in to the $model parameter
+     * Renders the repeater fields passed in to the $model parameter. Optionally wraps each repeater
+     * inside the before and after code.
      *
      * @param $model
+     * @param string $before
+     * @param string $after
      * @return string
      */
-    public static function renderRepeaters($model)
+    public static function renderRepeaters($model, string $before = null, string $after = null)
     {
         if (!Arr::get($model, 'repeaters')) {
             return null;
         }
 
-        return optional($model->repeaters)->map(function ($repeater) {
+        return optional($model->repeaters)->map(function ($repeater) use ($before, $after) {
             $repeaterType = new \ReflectionClass($repeater->type);
             $repeaterKey = str_replace('\\', '.', $repeaterType->name);
             $repeaterShortKey = $repeaterType->getShortName();
             $repeaterContent = $repeater->type;
             $repeater = $repeater;
 
-            return view()->first([
+            $view = view()->first([
                 $repeaterType->hasMethod('getBlockViewTemplate')
                     ? $repeaterType->getMethod('getBlockViewTemplate')->invoke(null)
                     : null,
@@ -40,6 +43,8 @@ class RenderEngine
                     'repeaterContent' => $repeaterContent,
                 ])->with($repeaterContent->toArray())
                 ->render();
+
+            return "{$before}{$view}{$after}";
         })->implode('');
     }
 
