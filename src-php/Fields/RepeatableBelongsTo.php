@@ -27,4 +27,27 @@ class RepeatableBelongsTo extends BelongsTo
             'reverse' => false,
         ], $this->meta);
     }
+
+    /**
+     * This method has been overloaded to remove the 'reverse' lookup because
+     * it causes some strange errors. No time to properly resovle the cause so
+     * we are hacking it like this for the moment. Doesn't appear to have caused
+     * any side-effects so far. Also removed the parent::jsonSerialize here.
+     *
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'belongsToId' => $this->belongsToId,
+            'belongsToRelationship' => $this->belongsToRelationship,
+            'label' => forward_static_call([$this->resourceClass, 'label']),
+            'resourceName' => $this->resourceName,
+            // 'reverse' => $this->isReverseRelation(app(NovaRequest::class)),
+            'searchable' => $this->searchable,
+            'singularLabel' => $this->singularLabel,
+            'viewable' => $this->viewable,
+            'displaysWithTrashed' => $this->displaysWithTrashed,
+        ];
+    }
 }
