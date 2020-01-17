@@ -38,16 +38,31 @@ class RepeatableBelongsTo extends BelongsTo
      */
     public function jsonSerialize()
     {
-        return [
+        return array_merge([
             'belongsToId' => $this->belongsToId,
             'belongsToRelationship' => $this->belongsToRelationship,
             'label' => forward_static_call([$this->resourceClass, 'label']),
             'resourceName' => $this->resourceName,
-            // 'reverse' => $this->isReverseRelation(app(NovaRequest::class)),
+            'reverse' => false,
             'searchable' => $this->searchable,
             'singularLabel' => $this->singularLabel,
             'viewable' => $this->viewable,
             'displaysWithTrashed' => $this->displaysWithTrashed,
-        ];
+        ], [
+            'component' => $this->component(),
+            'prefixComponent' => true,
+            'indexName' => $this->name,
+            'name' => $this->name,
+            'attribute' => $this->attribute,
+            'value' => $this->value,
+            'panel' => $this->panel,
+            'sortable' => $this->sortable,
+            'nullable' => $this->nullable,
+            'readonly' => $this->isReadonly(app(NovaRequest::class)),
+            'required' => $this->isRequired(app(NovaRequest::class)),
+            'textAlign' => $this->textAlign,
+            'sortableUriKey' => $this->sortableUriKey(),
+            'stacked' => $this->stacked,
+        ], $this->meta());
     }
 }
