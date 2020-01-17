@@ -3,6 +3,7 @@
 namespace Dewsign\NovaRepeaterBlocks\Fields;
 
 use \Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class RepeatableBelongsTo extends BelongsTo
 {
