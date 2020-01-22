@@ -44,6 +44,13 @@ class Repeater extends Resource
     public static $perPageViaRelationship = 100;
 
     /**
+     * The number of results to display in the global search.
+     *
+     * @var int
+     */
+    public static $globalSearchResults = 50;
+
+    /**
      * The columns that should be searched.
      *
      * @var array
@@ -51,6 +58,33 @@ class Repeater extends Resource
     public static $search = [
         'name',
     ];
+
+    /**
+     * Display the parent relationships leading to this repeater in search results.
+     *
+     * @return string
+     */
+    public function subtitle()
+    {
+        return self::getParentRepeaterName($this);
+    }
+
+    /**
+     * Recursively build the chain of parent relations.
+     *
+     * @param $repeater
+     * @return string
+     */
+    public static function getParentRepeaterName($repeater)
+    {
+        if (!$repeater->repeatable) {
+            return null;
+        }
+
+        $parentName = self::getParentRepeaterName($repeater->repeatable);
+
+        return "{$parentName} > {$repeater->repeatable->name}";
+    }
 
     /**
      * Get the displayable singular label of the resource.
