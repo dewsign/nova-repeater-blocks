@@ -21,4 +21,20 @@ return [
         Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\ContainerBlock::class,
         Dewsign\NovaRepeaterBlocks\Repeaters\Common\Blocks\CustomViewBlock::class,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Disable broken records
+    |--------------------------------------------------------------------------
+    |
+    | This config allows you to apply updates to morph tables in the event a
+    | given morph relation is broken. You can provide a list of database
+    | tables and their given columns and values to update.
+    |
+    */
+    'morph_tables' => [
+        'repeaters' => [
+            'disable_columns' => []
+        ]
+    ]
 ];
