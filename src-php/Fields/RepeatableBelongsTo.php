@@ -48,7 +48,7 @@ class RepeatableBelongsTo extends BelongsTo
             'searchable' => $this->searchable,
             'singularLabel' => $this->singularLabel,
             'viewable' => $this->viewable,
-            'displaysWithTrashed' => $this->displaysWithTrashed,
+            'displaysWithTrashed' => $this->displaysWithTrashed ?? false,
         ], [
             'component' => $this->component(),
             'prefixComponent' => true,

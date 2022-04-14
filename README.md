@@ -296,3 +296,45 @@ class GridBlockItem extends Model
     }
 }
 ```
+
+## Polymorphic relation redundancy
+
+In the event all record table data hasn't deleted when deleting a polymorphic record. You can now assign additional config to the `repeater-blocks` config file to act upon morph tables in an attempt prevent the record causing non-render when displaying polymorphic lists and/or breaking the website. This allows the record to graceful fail and keep any additonal data integrity intact as opposed to hard/force deleting the failing record.
+
+* To enable on existing installations you can simply include the below code to your published `repeater-blocks` config file.
+
+```php
+return [
+    ...
+    'morph_tables' => [
+        'my_morph_table_name' => [
+            'disable_columns' => [
+                'enabled' => false
+            ]
+        ],
+    ],
+    ...
+];
+```
+
+* Updating the config to fit your requirments is a simple as updating `my_morph_table_name` to your morph table name and adding a list of key value pairs within `disable_columns` where the key is your table column in your morph table and the value you wish to update the column to. As well as a list of `disable_columns` key value pairs, you may also include multiple morph tables to check on. The config will only use the `disable_columns` within the given morph table name if it is the cause of the issue.
+
+```php
+return [
+    ...
+    'morph_tables' => [
+        'repeaters' => [
+            'disable_columns' => [
+                'enabled' => false,
+            ]
+        ],
+        'spaces' => [
+            'disable_columns' => [
+                'active' => false,
+                'content' => "Issue rendering this block"
+            ]
+        ],
+    ],
+    ...
+];
+```

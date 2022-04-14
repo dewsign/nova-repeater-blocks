@@ -2,8 +2,11 @@
 
 namespace Dewsign\NovaRepeaterBlocks\Fields;
 
-use Laravel\Nova\Nova;
+use Http\Client\Exception\HttpException;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Laravel\Nova\Nova;
 use MichielKempen\NovaPolymorphicField\PolymorphicField;
 
 class Polymorphic extends PolymorphicField
@@ -33,7 +36,7 @@ class Polymorphic extends PolymorphicField
     {
         try {
             parent::resolveForDisplay($model, $this->attribute.'_type');
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             //
         }
  
@@ -44,10 +47,72 @@ class Polymorphic extends PolymorphicField
             foreach ($type['fields'] as $field) {
                 try {
                     $field->resolveForDisplay($model->{$this->attribute});
-                } catch (\Exception $e) {
-                    //
+                } catch (\Throwable $e) {
+                    $field->readonly(true);
                 }
             }
+        }
+    }
+
+    /**
+     * Retrieve values of dependency fields
+     *
+     * @param mixed $model
+     * @param string $attribute
+     * @return array|mixed
+     */
+    protected function resolveAttribute($model, $attribute)
+    {
+        try {
+            parent::resolveAttribute($model, $attribute);
+        } catch (ModelNotFoundException $e) {
+            $this->logMorphTableIssue($model, $e);
+            $this->updateMorphTable($model);
+        } catch (\Throwable $e) {
+            logger($e->getMessage());
+        }
+    }
+
+    /**
+     * Add debug messaging to the log to allow further investigation
+     *
+     * @param  Model      $model
+     * @param  \Exception $exception
+     * @return void
+     */
+    public function logMorphTableIssue(Model $model, \Exception $exception)
+    {
+        logger(sprintf(
+            "An issue has occured with ID: %d, Type: %s. This record has been disabled",
+            $model->id, $model->{$this->attribute . '_type'}
+        ), ['error' => $exception->getMessage()]);
+    }
+
+    /**
+     * In the event there is a morph relation issue we check to see if we can
+     * update the morph table with disable column updates, this in return
+     * allows for graceful notification/failure.
+     *
+     * @param  Model  $model
+     * @return void
+     */
+    private function updateMorphTable(Model $model)
+    {
+        $tableName = $model->getTable();
+        $columns = config("repeater-blocks.morph_tables.{$tableName}.disable_columns");
+
+        if (is_array($columns) && count($columns)) {
+            collect($model->getAttributes())
+            ->keys()
+            ->filter(function ($attribute) use ($columns) {
+                return isset($columns[$attribute]);
+            })
+            ->each(function($attribute, $index) use ($model, $columns) {
+                $model->{$attribute} = $columns[$attribute];
+            })
+            ->whenNotEmpty(function() use ($model) {
+                $model->save();
+            });
         }
     }
 }
