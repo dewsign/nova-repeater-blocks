@@ -2,7 +2,6 @@
 
 namespace Dewsign\NovaRepeaterBlocks\Fields;
 
-use Http\Client\Exception\HttpException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -64,7 +63,7 @@ class Polymorphic extends PolymorphicField
     protected function resolveAttribute($model, $attribute)
     {
         try {
-            parent::resolveAttribute($model, $attribute);
+            return parent::resolveAttribute($model, $attribute);
         } catch (ModelNotFoundException $e) {
             $this->logMorphTableIssue($model, $e);
             $this->updateMorphTable($model);
@@ -84,7 +83,8 @@ class Polymorphic extends PolymorphicField
     {
         logger(sprintf(
             "An issue has occured with ID: %d, Type: %s. This record has been disabled",
-            $model->id, $model->{$this->attribute . '_type'}
+            $model->id,
+            $model->{$this->attribute . '_type'}
         ), ['error' => $exception->getMessage()]);
     }
 
@@ -107,10 +107,10 @@ class Polymorphic extends PolymorphicField
             ->filter(function ($attribute) use ($columns) {
                 return isset($columns[$attribute]);
             })
-            ->each(function($attribute, $index) use ($model, $columns) {
+            ->each(function ($attribute, $index) use ($model, $columns) {
                 $model->{$attribute} = $columns[$attribute];
             })
-            ->whenNotEmpty(function() use ($model) {
+            ->whenNotEmpty(function () use ($model) {
                 $model->save();
             });
         }
