@@ -6,4 +6,7 @@
     @isset($link)
         </a>
     @endisset
+    @isset($caption)
+        <p>{{ $caption }}</p>
+    @endisset
 </div>
